@@ -1,18 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ControladorDeMovimiento : MonoBehaviour {
-    private GameObject pacmen;
+    public GameObject pacmen;
     [SerializeField]
     private Vector3 direccion, cardinalidadDelFantasma, diffDePac = new Vector3 (0, 0, 0);
     [SerializeField]
     private bool puntosLibres = false;
-    public float timescale;
+    public float timescale, speed;
 
     //controlador de puntos de rayos raycast
     private void Start () {
         buscarCardinalidadHaciaElObjetivo ();
+        //ignoramos las colisiones de todos los fantasmas
+        GameObject[] listaDeEnemigos = GameObject.FindGameObjectsWithTag("EditorOnly").ToArray();
+        foreach(GameObject e in listaDeEnemigos)
+        {
+            Physics2D.IgnoreCollision(e.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+        }
+        // Physics2D.IgnoreCollision(bullet.GetComponent<Collider2D>(), GetComponent<Collider2D>());
     }
     // Update is called once per frame
     void Update () {
@@ -96,7 +104,6 @@ public class ControladorDeMovimiento : MonoBehaviour {
     }
 
     private void buscarCardinalidadHaciaElObjetivo () {
-        pacmen = GameObject.Find ("pacmen");
         string resultado;
         Vector3 diff = pacmen.transform.position - transform.position;
         diffDePac = diff;
@@ -198,7 +205,7 @@ public class ControladorDeMovimiento : MonoBehaviour {
             direccion = transform.TransformDirection (Vector3.left);
         }
         //CambioDeCardinalidad (direccion);
-        cardinalidadDelFantasma = direccion;
+        cardinalidadDelFantasma = direccion * speed;
     }
 
     public Vector3 GetCardinalidad () {
