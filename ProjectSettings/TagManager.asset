@@ -6,6 +6,7 @@ TagManager:
   tags:
   - cuadricula
   - enemigo
+  - disparo
   layers:
   - Default
   - TransparentFX
