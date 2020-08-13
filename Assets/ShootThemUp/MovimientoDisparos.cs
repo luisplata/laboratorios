@@ -20,7 +20,10 @@ public class MovimientoDisparos : MonoBehaviour
         {
             GameObject disparoInstanciado = Instantiate(disparo, transform);
             //le damos velocidad
-            disparoInstanciado.GetComponent<Rigidbody2D>().velocity = Vector2.up * speedDisparo;
+            //Debug.Log(">>>>>" + (transform.position - GameObject.Find("DestruidorDeBalas").transform.position).magnitude);
+            //a2 = b2 + c2
+            //Debug.Log(">>>>>" + Hipotenusa());
+            disparoInstanciado.GetComponent<Rigidbody2D>().velocity = GameObject.Find("DestruidorDeBalas").transform.position - transform.position;
         }
         float cardinalidad = 0;
         if (Input.GetAxis("Horizontal") != 0)
@@ -28,5 +31,10 @@ public class MovimientoDisparos : MonoBehaviour
             cardinalidad = Input.GetAxis("Horizontal") < 0 ? -1 : 1;
         }
         GetComponent<Rigidbody2D>().velocity = new Vector2(cardinalidad * speed, 0);
+    }
+
+    public float Hipotenusa(float a, float b)
+    {
+        return Mathf.Sqrt(Mathf.Sqrt(a) + Mathf.Sqrt(b));
     }
 }

@@ -6,9 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/laboratorio_pacman.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
-    path: Assets/Scenes/laboratorio_pacman_v2.unity
-    guid: 1eae9c799dd682244b6f2a4ab2c4b751
+    path: Assets/Scenes/AplicacionYoutube.unity
+    guid: 2355dd86c9344434c8a9a7bebd34dc55
   m_configObjects: {}

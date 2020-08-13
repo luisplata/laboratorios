@@ -7,6 +7,12 @@ TagManager:
   - cuadricula
   - enemigo
   - disparo
+  - piso
+  - golpe
+  - inicio
+  - cabeza
+  - obstaculo
+  - pies
   layers:
   - Default
   - TransparentFX
