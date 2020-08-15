@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class TeoriaDeGrafos : MonoBehaviour
@@ -14,6 +15,8 @@ public class TeoriaDeGrafos : MonoBehaviour
     [ContextMenuItem("Ejecutara una funcion recursiva para crear las distancias entre los verices", "GenerarMapaDeDialogosDelGrafo")]
     public ObjetoInteractuable distanciaDesdeAqui;
     private Dictionary<ObjetoInteractuable, int> distanciasPorVertice;
+    [SerializeField]
+    private int distanciaMaxima;
     
     //Generamos el verice final a partir de los vertices seleccionados
 
@@ -36,12 +39,61 @@ public class TeoriaDeGrafos : MonoBehaviour
         {
             verticesVisitados = new List<ObjetoInteractuable>();
             verticesVisitados.Add(distanciaDesdeAqui);
-            int distancia = 0;
-            Debug.Log(">>>>>>>Distancia " + distancia);
+            int distancia = 1;
+            distanciaMaxima = 0;
+            //setear las distancias ya recorrifas
+            foreach (ObjetoInteractuable ob in vertices)
+            {
+                ob.distancia = 0;
+            }
             distancia = FuncionRecursivaParaEncontrarFinal(distancia, verticeIndivi);
+            //Debug.Log(">>>>>>>Distancia " + distancia);
             distanciasPorVertice[verticeIndivi] = distancia;
         }
         ImprimirCasos(distanciasPorVertice);
+    }
+
+    public string[] DialogosDeEsteObjeto(ObjetoInteractuable origen)
+    {
+
+        distanciasPorVertice = new Dictionary<ObjetoInteractuable, int>();
+        string[] resultado = new string[origen.aristas.Count];
+        int i = 0;
+        foreach (ObjetoInteractuable verticeIndivi in origen.aristas)
+        {
+            verticesVisitados = new List<ObjetoInteractuable>();
+            verticesVisitados.Add(distanciaDesdeAqui);
+            int distancia = 1;
+            distanciaMaxima = 0;
+            //setear las distancias ya recorrifas
+            foreach (ObjetoInteractuable ob in vertices)
+            {
+                ob.distancia = 0;
+            }
+            distancia = FuncionRecursivaParaEncontrarFinal(distancia, verticeIndivi);
+            distanciasPorVertice[verticeIndivi] = distancia;
+            i++;
+        }
+
+        //debemos organizarlos por orden de distancia
+        var query = from pair in distanciasPorVertice orderby pair.Value ascending select pair;
+        int o = 0;//es la variable donde vamos a guardar la distancia mas corta para ver si la tomamos de nuevo...
+        i = 0;
+        foreach (KeyValuePair<ObjetoInteractuable, int> r in query)
+        {
+            if(i == 0 || r.Value <= o)
+            {
+                resultado[i] = r.Key.dialogoBueno;
+                o = r.Value;
+            }
+            else
+            {
+                resultado[i] = r.Key.dialogoMalo;
+            }
+            //Debug.Log(r.Key.gameObject.name+" indice "+i+" distancia "+r.Value);
+            i++;
+        }
+        return resultado;
     }
 
 
@@ -49,31 +101,40 @@ public class TeoriaDeGrafos : MonoBehaviour
     {
         foreach (KeyValuePair<ObjetoInteractuable, int> result in listado)
         {
-            Debug.Log(string.Format("Objeto-{0}:Distancia-{1}", result.Key.gameObject.name, result.Value));
+            //Debug.Log(string.Format("Objeto-{0}:Distancia-{1}", result.Key.gameObject.name, result.Value));
         }
     }
 
     public int FuncionRecursivaParaEncontrarFinal(int distancia, ObjetoInteractuable verticeIndividual)
     {
-        Debug.LogWarning("Objeto visitado es: " + verticeIndividual.gameObject.name + " distancia hasta aqui es: " + distancia);
         if (verticeIndividual.Equals(verticeFinal))
         {
-            Debug.LogWarning(">>>>>> esporque es el final");
-            return distancia;
-        }else if (verticesVisitados.Contains(verticeIndividual))
+            if(distancia < distanciaMaxima)
+            {
+                distanciaMaxima = distancia;
+            }
+            else
+            {
+                //Debug.LogWarning(">>>>>> esporque es el final");
+                return distancia;
+            }
+        }
+
+        if (verticesVisitados.Contains(verticeIndividual) && verticeIndividual.distancia < distancia)
         {
-            Debug.LogWarning(">>>>>> esporque ya a sido visitado");
+            //Debug.LogWarning("Es porque ya a sido visitado "+ verticeIndividual.gameObject.name +" pero distancia recorrida hasta el fue de: "+verticeIndividual.distancia+" y la recorrida hsata ahora es de "+distancia );
             return distancia;
         }
         else
         {
             verticesVisitados.Add(verticeIndividual);
+            verticeIndividual.distancia = distancia;
             ////Todo esta bien
-
+            distancia++;
             foreach (ObjetoInteractuable arista in verticeIndividual.aristas)
             {
-                distancia++;
-                FuncionRecursivaParaEncontrarFinal(distancia, arista);
+                //Debug.LogWarning("El objeto "+verticeIndividual.gameObject.name+" visita a: " + arista.gameObject.name + " distancia hasta aqui es: " + distancia);
+                distancia = FuncionRecursivaParaEncontrarFinal(distancia, arista);
             }
             return distancia;
         }
