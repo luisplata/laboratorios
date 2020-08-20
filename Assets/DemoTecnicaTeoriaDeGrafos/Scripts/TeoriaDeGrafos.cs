@@ -29,7 +29,7 @@ public class TeoriaDeGrafos : MonoBehaviour
 
     public void GenerarMapaDeDialogosDelGrafo()
     {
-        if(distanciaDesdeAqui == null)
+        /*if(distanciaDesdeAqui == null)
         {
             throw new Exception("No a sido declarado el inicio");
         }
@@ -50,12 +50,25 @@ public class TeoriaDeGrafos : MonoBehaviour
             //Debug.Log(">>>>>>>Distancia " + distancia);
             distanciasPorVertice[verticeIndivi] = distancia;
         }
-        ImprimirCasos(distanciasPorVertice);
+        */
+        //ImprimirCasos(distanciasPorVertice);
+        
     }
 
     public string[] DialogosDeEsteObjeto(ObjetoInteractuable origen)
     {
-
+        foreach(ObjetoInteractuable o in origen.aristas)
+        {
+            //reiniciar el estado vistado a todos
+            foreach(GameObject oo in GameObject.FindGameObjectsWithTag("inicio"))
+            {
+                oo.GetComponent<ObjetoInteractuable>().visitado = false;
+                oo.GetComponent<ObjetoInteractuable>().distancia = 0;
+            }
+            BFS(o);
+        }
+        return new string[] { "" };
+        /*
         distanciasPorVertice = new Dictionary<ObjetoInteractuable, int>();
         string[] resultado = new string[origen.aristas.Count];
         int i = 0;
@@ -93,7 +106,7 @@ public class TeoriaDeGrafos : MonoBehaviour
             //Debug.Log(r.Key.gameObject.name+" indice "+i+" distancia "+r.Value);
             i++;
         }
-        return resultado;
+        return resultado;*/
     }
 
 
@@ -140,5 +153,43 @@ public class TeoriaDeGrafos : MonoBehaviour
         }
         
     }
-    
+
+
+    public void BFS(ObjetoInteractuable origen)
+    {
+        Queue<ObjetoInteractuable> cola = new Queue<ObjetoInteractuable>();
+        cola.Enqueue(origen);
+        origen.visitado = true;
+        int i = 0;
+        while (cola.Count > 0)
+        {
+            ObjetoInteractuable v = cola.Dequeue();
+            //si es el final return
+            if (v == verticeFinal)
+            {
+                break;
+            }
+            i++;
+            foreach (ObjetoInteractuable w in v.aristas)
+            {
+                Debug.Log("origen " + v.name + " distancia hasta ahora " + i + " destino " + w.name + " distancia del destino " + w.distancia + " fue visitado? " + w.visitado);
+                if (!w.visitado)
+                {
+                    w.visitado = true;
+                    w.distancia = i;
+                    cola.Enqueue(w);
+                }
+                else if (w.distancia < i && w == verticeFinal)
+                {
+                    i = w.distancia;
+                }
+                else
+                {
+                    break;
+                }
+            }
+        }
+        Debug.Log("i " + i);
+    }
+
 }

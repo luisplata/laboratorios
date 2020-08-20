@@ -133,6 +133,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: house
       objectReference: {fileID: 0}
+    - target: {fileID: 7068455606976098456, guid: 316786e2a0f359045a6071884db7f30f,
+        type: 3}
+      propertyPath: m_TagString
+      value: inicio
+      objectReference: {fileID: 0}
     - target: {fileID: 7068455606976098457, guid: 316786e2a0f359045a6071884db7f30f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -670,6 +675,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   distancia: 0
+  visitado: 0
 --- !u!1 &1506537543
 GameObject:
   m_ObjectHideFlags: 0
@@ -733,6 +739,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: tree
+      objectReference: {fileID: 0}
+    - target: {fileID: 7068455606976098456, guid: 316786e2a0f359045a6071884db7f30f,
+        type: 3}
+      propertyPath: m_TagString
+      value: inicio
       objectReference: {fileID: 0}
     - target: {fileID: 7068455606976098457, guid: 316786e2a0f359045a6071884db7f30f,
         type: 3}
@@ -847,6 +858,11 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 7068455606976098461, guid: 316786e2a0f359045a6071884db7f30f,
         type: 3}
+      propertyPath: aristas.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7068455606976098461, guid: 316786e2a0f359045a6071884db7f30f,
+        type: 3}
       propertyPath: dialogoBueno
       value: Treeeeeeeeee ok
       objectReference: {fileID: 0}
@@ -863,6 +879,11 @@ PrefabInstance:
     - target: {fileID: 7068455606976098461, guid: 316786e2a0f359045a6071884db7f30f,
         type: 3}
       propertyPath: aristas.Array.data[0]
+      value: 
+      objectReference: {fileID: 1875115470}
+    - target: {fileID: 7068455606976098461, guid: 316786e2a0f359045a6071884db7f30f,
+        type: 3}
+      propertyPath: aristas.Array.data[1]
       value: 
       objectReference: {fileID: 1652965140}
     m_RemovedComponents: []
@@ -896,6 +917,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: tower
+      objectReference: {fileID: 0}
+    - target: {fileID: 7068455606976098456, guid: 316786e2a0f359045a6071884db7f30f,
+        type: 3}
+      propertyPath: m_TagString
+      value: inicio
       objectReference: {fileID: 0}
     - target: {fileID: 7068455606976098457, guid: 316786e2a0f359045a6071884db7f30f,
         type: 3}
@@ -1010,6 +1036,11 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 7068455606976098461, guid: 316786e2a0f359045a6071884db7f30f,
         type: 3}
+      propertyPath: aristas.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7068455606976098461, guid: 316786e2a0f359045a6071884db7f30f,
+        type: 3}
       propertyPath: dialogoBueno
       value: towerrrrrrrrr ok
       objectReference: {fileID: 0}
@@ -1072,6 +1103,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: cactus
+      objectReference: {fileID: 0}
+    - target: {fileID: 7068455606976098456, guid: 316786e2a0f359045a6071884db7f30f,
+        type: 3}
+      propertyPath: m_TagString
+      value: inicio
       objectReference: {fileID: 0}
     - target: {fileID: 7068455606976098457, guid: 316786e2a0f359045a6071884db7f30f,
         type: 3}
@@ -1186,6 +1222,11 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 7068455606976098461, guid: 316786e2a0f359045a6071884db7f30f,
         type: 3}
+      propertyPath: aristas.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7068455606976098461, guid: 316786e2a0f359045a6071884db7f30f,
+        type: 3}
       propertyPath: dialogoBueno
       value: cantusssssssss ok
       objectReference: {fileID: 0}
@@ -1204,6 +1245,11 @@ PrefabInstance:
       propertyPath: aristas.Array.data[0]
       value: 
       objectReference: {fileID: 1652965140}
+    - target: {fileID: 7068455606976098461, guid: 316786e2a0f359045a6071884db7f30f,
+        type: 3}
+      propertyPath: aristas.Array.data[1]
+      value: 
+      objectReference: {fileID: 722626}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 316786e2a0f359045a6071884db7f30f, type: 3}
 --- !u!224 &1875115469 stripped
@@ -1235,6 +1281,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: bush
+      objectReference: {fileID: 0}
+    - target: {fileID: 7068455606976098456, guid: 316786e2a0f359045a6071884db7f30f,
+        type: 3}
+      propertyPath: m_TagString
+      value: inicio
       objectReference: {fileID: 0}
     - target: {fileID: 7068455606976098457, guid: 316786e2a0f359045a6071884db7f30f,
         type: 3}

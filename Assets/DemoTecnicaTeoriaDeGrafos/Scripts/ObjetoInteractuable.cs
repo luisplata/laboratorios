@@ -12,6 +12,7 @@ public class ObjetoInteractuable : MonoBehaviour
     private TeoriaDeGrafos padre;
     private Button boton;
     public int distancia;
+    public bool visitado = false;
     private void Start()
     {
         padre = GameObject.Find("TeoriaDeGrafos").GetComponent<TeoriaDeGrafos>();
